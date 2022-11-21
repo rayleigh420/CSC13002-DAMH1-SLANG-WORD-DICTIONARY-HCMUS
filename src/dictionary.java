@@ -42,10 +42,8 @@ public class dictionary
     }
 
     public static void printDictionary() {
-        Set<Map.Entry<String, Set<String>>> entries = data.entrySet();
-        for(Map.Entry<String, Set<String>> entry : entries){
-            System.out.println( entry.getKey() + "\t->\t" + entry.getValue() );
-        }
+        Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+        dictionary.forEach(item -> System.out.println(item.getKey() + "\t->\t" + item.getValue()));
     }
 
 	public static void main(String[] args) throws IOException {
