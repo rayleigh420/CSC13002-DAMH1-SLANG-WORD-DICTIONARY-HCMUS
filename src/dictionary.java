@@ -8,11 +8,16 @@ public class dictionary
 {
     public static String DATA_DIR = "../asset/slang.txt";
 
-    private TreeMap<String, Set<String>> data;
+    public static TreeMap<String, Set<String>> data;
     private static Scanner sc = new Scanner(System.in);
 
-    private void loadData(){
-        this.data = new TreeMap<String, Set<String>>();
+    public static void setUpDictionary() {
+        loadData();
+        printDictionary();
+    }
+
+    private static void loadData(){
+        data = new TreeMap<String, Set<String>>();
 
         try(
             BufferedReader br = new BufferedReader(new FileReader(new File(DATA_DIR)))
@@ -21,11 +26,11 @@ public class dictionary
             String w;
             while((w = br.readLine()) != null){
                 String[] wordAndDef = w.split("`");
-                
+
                 if (wordAndDef.length == 2){
                     String[] definition = wordAndDef[1].split("\\|");
                     Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
-                    this.data.put(wordAndDef[0], def);
+                    data.put(wordAndDef[0], def);
                 }
             }
             br.close();
@@ -36,7 +41,15 @@ public class dictionary
         }
     }
 
+    public static void printDictionary() {
+        Set<Map.Entry<String, Set<String>>> entries = data.entrySet();
+        for(Map.Entry<String, Set<String>> entry : entries){
+            System.out.println( entry.getKey() + "\t->\t" + entry.getValue() );
+        }
+    }
+
 	public static void main(String[] args) throws IOException {
+        setUpDictionary();
         String choice;
 
         while(true){
