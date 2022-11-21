@@ -2,10 +2,39 @@ import java.util.*;
 import java.io.*;
 import javax.swing.*;
 import java.awt.*;
+import java.util.stream.Collectors;
 
 public class dictionary
 {
+    public static String DATA_DIR = "../asset/slang.txt";
+
+    private TreeMap<String, Set<String>> data;
     private static Scanner sc = new Scanner(System.in);
+
+    private void loadData(){
+        this.data = new TreeMap<String, Set<String>>();
+
+        try(
+            BufferedReader br = new BufferedReader(new FileReader(new File(DATA_DIR)))
+        )
+        {
+            String w;
+            while((w = br.readLine()) != null){
+                String[] wordAndDef = w.split("`");
+                
+                if (wordAndDef.length == 2){
+                    String[] definition = wordAndDef[1].split("\\|");
+                    Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
+                    this.data.put(wordAndDef[0], def);
+                }
+            }
+            br.close();
+
+        }
+        catch (IOException e){
+            System.out.println("Error message: " + e);
+        }
+    }
 
 	public static void main(String[] args) throws IOException {
         String choice;
