@@ -125,6 +125,11 @@ public class dictionary
 
     }
 
+    public static void resetDictionary(){
+        loadData();
+        System.out.println("Rest Dictionary!");
+    }
+
 	public static void main(String[] args) throws IOException {
         setUpDictionary();
         String choice;
@@ -165,7 +170,7 @@ public class dictionary
                 printDictionary();
             }
             else if (choice.equals("7")){
-                System.out.println(choice);
+                resetDictionary();
             }
             else if (choice.equals("8")){
                 System.out.println(choice);
