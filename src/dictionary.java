@@ -3,16 +3,20 @@ import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.stream.Collectors;
+import java.util.List;
 
 public class dictionary
 {
     public static String DATA_DIR = "../asset/slang.txt";
 
     public static TreeMap<String, Set<String>> data;
+    public static List<String> history;
     private static Scanner sc = new Scanner(System.in);
 
     public static void setUpDictionary() {
         loadData();
+
+        history = new ArrayList<String>();
         // printDictionary();
     }
 
@@ -46,10 +50,15 @@ public class dictionary
         dictionary.forEach(item -> System.out.println(item.getKey() + "\t->\t" + item.getValue()));
     }
 
+    public static void addHistory(String word){
+        history.add(word);
+    }
+
     public static void searchSlang(){
         System.out.println();
         System.out.print("Enter word you want to search: ");
         String word = sc.nextLine().trim();
+        addHistory(word);
 
         Set<String> def = data.get(word);
         if (def == null){
@@ -75,6 +84,17 @@ public class dictionary
                 }
             }
         });
+    }
+
+    public static void printHistory(){
+        if (history.isEmpty()){
+            System.out.println("History is empty");
+        }
+        else {
+            for(String item : history){
+                System.out.println(item);
+            }
+        }
     }
 
 	public static void main(String[] args) throws IOException {
@@ -104,7 +124,7 @@ public class dictionary
                 searchDefinition();
             }
             else if (choice.equals("3")){
-                System.out.println(choice);
+                printHistory();
             }
             else if (choice.equals("4")){
                 System.out.println(choice);
