@@ -97,6 +97,34 @@ public class dictionary
         }
     }
 
+    public static void deleteSlang(){
+        System.out.println();
+        System.out.print("Enter word you want to delete: ");
+        String word = sc.nextLine().trim().toUpperCase();
+
+        System.out.println("1. Yes");
+        System.out.println("2. No");
+        System.out.print("Are you sure to delete word?: ");
+
+        String choice = sc.nextLine();
+        if (choice.equals("1")){
+            if (data.remove(word) == null){
+                System.out.println("Word not exist");
+            }
+            else {
+                System.out.println("Delete Success!");
+            }
+        }
+        else if (choice.equals("2")){
+            return;
+        }
+        else {
+            System.out.println("Invalid choosen!");
+            return;
+        }
+
+    }
+
 	public static void main(String[] args) throws IOException {
         setUpDictionary();
         String choice;
@@ -133,7 +161,8 @@ public class dictionary
                 System.out.println(choice);
             }
             else if (choice.equals("6")){
-                System.out.println(choice);
+                deleteSlang();
+                printDictionary();
             }
             else if (choice.equals("7")){
                 System.out.println(choice);
