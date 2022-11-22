@@ -13,7 +13,7 @@ public class dictionary
 
     public static void setUpDictionary() {
         loadData();
-        printDictionary();
+        // printDictionary();
     }
 
     private static void loadData(){
@@ -46,6 +46,37 @@ public class dictionary
         dictionary.forEach(item -> System.out.println(item.getKey() + "\t->\t" + item.getValue()));
     }
 
+    public static void searchSlang(){
+        System.out.println();
+        System.out.print("Enter word you want to search: ");
+        String word = sc.nextLine().trim();
+
+        Set<String> def = data.get(word);
+        if (def == null){
+            System.out.println("Word not exist!");
+        }
+        else {
+            System.out.println("Founded!");
+            System.out.println(word + ": " + def);
+        }
+    }
+
+    public static void searchDefinition(){
+        System.out.println();
+        System.out.print("Enter definition you want to search: ");
+        String def = sc.nextLine().trim();
+
+        Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+        dictionary.forEach(item -> {
+            Set<String> defList = item.getValue();
+            for(String i : defList){
+                if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
+                    System.out.println(i);
+                }
+            }
+        });
+    }
+
 	public static void main(String[] args) throws IOException {
         setUpDictionary();
         String choice;
@@ -67,10 +98,10 @@ public class dictionary
 			choice = sc.nextLine();
 
             if (choice.equals("1")){
-                System.out.println(choice);
+                searchSlang();
             }
             else if (choice.equals("2")){
-                System.out.println(choice);
+                searchDefinition();
             }
             else if (choice.equals("3")){
                 System.out.println(choice);
