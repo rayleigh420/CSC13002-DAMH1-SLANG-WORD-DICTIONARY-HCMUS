@@ -104,6 +104,57 @@ public class dictionary
         }
     }
 
+    public static void addSlangWord(){
+        Set<String> definition = new HashSet<String>();
+        System.out.println();
+        System.out.print("Enter word you want to add: ");
+        String word = sc.nextLine().trim().toUpperCase();
+
+        String chosen = "0";
+        if (data.containsKey(word)){
+            System.out.println();
+            System.out.println("Word exist in dictionary!");
+            System.out.println("1. Overwrite Slang Word");
+            System.out.println("2. Duplicate to new Slang Word");
+            System.out.print("Enter your chosen: ");
+            chosen = sc.nextLine();
+        }
+        
+        int c = 0;
+        System.out.println();
+        System.out.print("Enter number of definition of Slang Word you want to add: ");
+        c = Integer.parseInt(sc.nextLine());
+
+        for (int i = 0; i < c; i++){
+            System.out.print("Enter " + i + " st definition: ");
+            definition.add(sc.nextLine());
+        }
+
+        if (chosen.equals("0") || chosen.equals("1")){
+            data.put(word, definition);
+        }
+        else if (chosen.equals("2")){
+            data.put(word.toLowerCase(), definition);   
+        }
+        else{
+            return;
+        }
+    }
+
+    public static void editSlangWord(){
+        Set<String> definition = new HashSet<String>();
+        System.out.println();
+        System.out.print("Enter word you want to edit: ");
+        String word = sc.nextLine().trim().toUpperCase();
+
+        if (!data.containsKey(word)){
+            System.out.println("Word not exist!");
+            return;
+        }
+
+        
+    }
+
     public static void deleteSlang(){
         System.out.println();
         System.out.print("Enter word you want to delete: ");
@@ -145,7 +196,7 @@ public class dictionary
 			System.out.println();
 			System.out.println("1. Search Slang Word");
 			System.out.println("2. Search Slang Word follow definition");
-			System.out.println("3. Show History");
+			System.out.println("3. Show Search History");
 			System.out.println("4. Add new Slang Word");
 			System.out.println("5. Edit Slang Word");
 			System.out.println("6. Delete Slang Word");
@@ -167,10 +218,10 @@ public class dictionary
                 printHistory();
             }
             else if (choice.equals("4")){
-                System.out.println(choice);
+                addSlangWord();
             }
             else if (choice.equals("5")){
-                System.out.println(choice);
+                editSlangWord();
             }
             else if (choice.equals("6")){
                 deleteSlang();
