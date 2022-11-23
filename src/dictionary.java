@@ -220,6 +220,13 @@ public class dictionary
         System.out.println("Rest Dictionary Success!");
     }
 
+    public static void onThisDaySlang(){
+        List<String> keysAsArray = new ArrayList<String>(data.keySet());
+        Random r = new Random();
+        String word = keysAsArray.get(r.nextInt(keysAsArray.size()));
+        System.out.println(word + ": " + data.get(word));
+    }
+
 	public static void main(String[] args) throws IOException {
         setUpDictionary();
         String choice;
@@ -263,7 +270,7 @@ public class dictionary
                 resetDictionary();
             }
             else if (choice.equals("8")){
-                System.out.println(choice);
+                onThisDaySlang();
             }
             else if (choice.equals("9")){
                 System.out.println(choice);
