@@ -57,7 +57,7 @@ public class dictionary
     public static void searchSlang(){
         System.out.println();
         System.out.print("Enter word you want to search: ");
-        String word = sc.nextLine().trim();
+        String word = sc.nextLine().trim().toUpperCase();
         addHistory(word);
 
         Set<String> def = data.get(word);
@@ -139,6 +139,8 @@ public class dictionary
         else{
             return;
         }
+
+        System.out.println("Add new Slang Word Success!");
     }
 
     public static void editSlangWord(){
@@ -182,6 +184,7 @@ public class dictionary
         }
 
         data.put(word, definition);
+        System.out.println("Edit Slang Word Success!");
     }
 
     public static void deleteSlang(){
@@ -214,7 +217,7 @@ public class dictionary
 
     public static void resetDictionary(){
         loadData();
-        System.out.println("Rest Dictionary!");
+        System.out.println("Rest Dictionary Success!");
     }
 
 	public static void main(String[] args) throws IOException {
