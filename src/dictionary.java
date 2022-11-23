@@ -151,8 +151,37 @@ public class dictionary
             System.out.println("Word not exist!");
             return;
         }
+        else {
+            System.out.println(word + ": " + data.get(word));
+        }
 
+        String chosen;
+        System.out.println("1. Add more definition for Slang Word");
+        System.out.println("2. Create new definition for Slang Word");
+        System.out.print("Enter your chosen: ");
+        chosen = sc.nextLine();
+
+        int c = 0;
+        System.out.println();
+        System.out.print("Enter number of definition of Slang Word you want to add: ");
+        c = Integer.parseInt(sc.nextLine());
+
+        for (int i = 0; i < c; i++){
+            System.out.print("Enter " + i + " st definition: ");
+            definition.add(sc.nextLine());
+        }
         
+        if (chosen.equals("1")){
+            definition.addAll(data.get(word));
+        }
+        else if (chosen.equals("2")){
+
+        }
+        else {
+            return;
+        }
+
+        data.put(word, definition);
     }
 
     public static void deleteSlang(){
