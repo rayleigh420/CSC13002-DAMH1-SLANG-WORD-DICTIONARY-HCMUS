@@ -7,7 +7,7 @@ import java.util.List;
 
 public class dictionary
 {
-    public static String DATA_DIR = "../asset/slang.txt";
+    public static String DATA_DIR = "../asset/data/slang.txt";
 
     public static TreeMap<String, Set<String>> data, rawData;
     public static List<String> history;
