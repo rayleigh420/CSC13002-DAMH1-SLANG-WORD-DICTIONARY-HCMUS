@@ -9,15 +9,15 @@ public class dictionary
 {
     public static String DATA_DIR = "../asset/slang.txt";
 
-    public static TreeMap<String, Set<String>> data;
+    public static TreeMap<String, Set<String>> data, rawData;
     public static List<String> history;
     private static Scanner sc = new Scanner(System.in);
 
     public static void setUpDictionary() {
         loadData();
+        printDictionary();
 
         history = new ArrayList<String>();
-        // printDictionary();
     }
 
     private static void loadData(){
@@ -37,6 +37,7 @@ public class dictionary
                     data.put(wordAndDef[0], def);
                 }
             }
+            rawData = new TreeMap<String, Set<String>>(data);   
             br.close();
 
         }
@@ -216,7 +217,7 @@ public class dictionary
     }
 
     public static void resetDictionary(){
-        loadData();
+        data = rawData;
         System.out.println("Rest Dictionary Success!");
     }
 
