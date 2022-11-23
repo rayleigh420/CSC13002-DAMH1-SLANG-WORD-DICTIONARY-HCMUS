@@ -62,12 +62,19 @@ public class dictionary
 
         Set<String> def = data.get(word);
         if (def == null){
-            System.out.println("Word not exist!");
+            Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+            dictionary.forEach(item -> {
+                String w = item.getKey();
+                if (w.contains(word.toUpperCase())){
+                    System.out.println(w + ": " + item.getKey());
+                }
+            });
         }
         else {
             System.out.println("Founded!");
             System.out.println(word + ": " + def);
         }
+
     }
 
     public static void searchDefinition(){
@@ -119,7 +126,7 @@ public class dictionary
             return;
         }
         else {
-            System.out.println("Invalid choosen!");
+            System.out.println("Invalid chosen!");
             return;
         }
 
@@ -138,7 +145,7 @@ public class dictionary
 			System.out.println();
 			System.out.println("1. Search Slang Word");
 			System.out.println("2. Search Slang Word follow definition");
-			System.out.println("3. Search History");
+			System.out.println("3. Show History");
 			System.out.println("4. Add new Slang Word");
 			System.out.println("5. Edit Slang Word");
 			System.out.println("6. Delete Slang Word");
