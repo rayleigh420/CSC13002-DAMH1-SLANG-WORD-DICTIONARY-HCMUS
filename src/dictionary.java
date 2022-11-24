@@ -9,6 +9,7 @@ public class dictionary
 {
     public static String RAW_DATA_DIR = "../asset/rawData/slang.txt";
     public static String DATA_DIR = "../asset/data/dictionary.txt";
+    public static String HISTORY = "../asset/history/history.txt";
 
     public static TreeMap<String, Set<String>> data;
     public static List<String> history;
@@ -52,7 +53,7 @@ public class dictionary
             for(Map.Entry<String, Set<String>> item : dictionary){
                 fw.write(item.getKey() + "`");
                 Set<String> definition = item.getValue();
-                String lastDef = definition.stream().reduce((one, two) -> two).get();
+                String lastDef = definition.stream().reduce((a, b) -> b).get();
                 for (String def : definition){
                     if (def.equals(lastDef)){
                         fw.write(def + "\n");
@@ -70,13 +71,26 @@ public class dictionary
         }
     }
 
+    private static void saveHistory(){
+        try(FileWriter fw = new FileWriter(new File(HISTORY))){
+            for (String item : history){
+                fw.write(item + "\n");
+            }
+            fw.close();
+        }
+        catch (IOException e){
+            System.out.println("Error message: " + e);
+        }
+    }
+
     public static void printDictionary() {
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
-        dictionary.forEach(item -> System.out.println(item.getKey() + "\t->\t" + item.getValue()));
+        dictionary.forEach(item -> System.out.println(item.getKey() + ": " + item.getValue()));
     }
 
     public static void addHistory(String word){
         history.add(word);
+        saveHistory();
     }
 
     public static void searchSlang(){
