@@ -7,24 +7,25 @@ import java.util.List;
 
 public class dictionary
 {
-    public static String DATA_DIR = "../asset/data/slang.txt";
+    public static String RAW_DATA_DIR = "../asset/rawData/slang.txt";
+    public static String DATA_DIR = "../asset/data/dictionary.txt";
 
-    public static TreeMap<String, Set<String>> data, rawData;
+    public static TreeMap<String, Set<String>> data;
     public static List<String> history;
     private static Scanner sc = new Scanner(System.in);
 
     public static void setUpDictionary() {
-        loadData();
+        loadData(DATA_DIR);
         printDictionary();
 
         history = new ArrayList<String>();
     }
 
-    private static void loadData(){
+    private static void loadData(String PATH){
         data = new TreeMap<String, Set<String>>();
 
         try(
-            BufferedReader br = new BufferedReader(new FileReader(new File(DATA_DIR)))
+            BufferedReader br = new BufferedReader(new FileReader(new File(PATH)))
         )
         {
             String w;
@@ -36,10 +37,33 @@ public class dictionary
                     Set<String> def = new HashSet<>(Arrays.stream(definition).collect(Collectors.toSet()));
                     data.put(wordAndDef[0], def);
                 }
-            }
-            rawData = new TreeMap<String, Set<String>>(data);   
+            }  
             br.close();
 
+        }
+        catch (IOException e){
+            System.out.println("Error message: " + e);
+        }
+    }
+
+    private static void saveData(){
+        try(FileWriter fw = new FileWriter(new File(DATA_DIR))){
+            Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
+            for(Map.Entry<String, Set<String>> item : dictionary){
+                fw.write(item.getKey() + "`");
+                Set<String> definition = item.getValue();
+                String lastDef = definition.stream().reduce((one, two) -> two).get();
+                for (String def : definition){
+                    if (def.equals(lastDef)){
+                        fw.write(def + "\n");
+                    }
+                    else {
+                        fw.write(def + "| ");
+                    }
+                }
+            };
+
+            fw.close();
         }
         catch (IOException e){
             System.out.println("Error message: " + e);
@@ -142,6 +166,7 @@ public class dictionary
         }
 
         System.out.println("Add new Slang Word Success!");
+        saveData();
     }
 
     public static void editSlangWord(){
@@ -186,6 +211,7 @@ public class dictionary
 
         data.put(word, definition);
         System.out.println("Edit Slang Word Success!");
+        saveData();
     }
 
     public static void deleteSlang(){
@@ -213,11 +239,11 @@ public class dictionary
             System.out.println("Invalid chosen!");
             return;
         }
-
+        saveData();
     }
 
     public static void resetDictionary(){
-        data = rawData;
+        loadData(RAW_DATA_DIR);
         System.out.println("Rest Dictionary Success!");
     }
 
