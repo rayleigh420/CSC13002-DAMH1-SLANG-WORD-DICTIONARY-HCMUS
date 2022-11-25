@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Vector;
 
 public class dictionary
 {
@@ -12,14 +13,16 @@ public class dictionary
     public static String HISTORY = "../asset/history/history.txt";
 
     public static TreeMap<String, Set<String>> data;
-    public static List<String> history;
+    //public static List<String> history;
+    public static Vector<String> history;
     private static Scanner sc = new Scanner(System.in);
 
     public static void setUpDictionary() {
         loadData(DATA_DIR);
         printDictionary();
 
-        history = new ArrayList<String>();
+        //history = new ArrayList<String>();
+        history = new Vector<String>();
     }
 
     private static void loadData(String PATH){
@@ -70,6 +73,10 @@ public class dictionary
             System.out.println("Error message: " + e);
         }
     }
+
+    // private void static loadHistory(){
+    //     history = new Set
+    // }
 
     private static void saveHistory(){
         try(FileWriter fw = new FileWriter(new File(HISTORY))){
