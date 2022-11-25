@@ -13,7 +13,6 @@ public class dictionary
     public static String HISTORY = "../asset/history/history.txt";
 
     public static TreeMap<String, Set<String>> data;
-    //public static List<String> history;
     public static Vector<String> history;
     private static Scanner sc = new Scanner(System.in);
 
@@ -21,8 +20,6 @@ public class dictionary
         loadData(DATA_DIR);
         loadHistory();
         printDictionary();
-
-        //history = new ArrayList<String>();
     }
 
     private static void loadData(String PATH){
@@ -282,11 +279,26 @@ public class dictionary
         System.out.println("Rest Dictionary Success!");
     }
 
-    public static void onThisDaySlang(){
+    public static String onThisDaySlang(Boolean quiz){
         List<String> keysAsArray = new ArrayList<String>(data.keySet());
         Random r = new Random();
         String word = keysAsArray.get(r.nextInt(keysAsArray.size()));
-        System.out.println(word + ": " + data.get(word));
+        if (quiz == false){
+            System.out.println(word + ": " + data.get(word));
+        }
+        return word;
+    }
+
+    public static void slangWordQuiz(){
+        TreeMap<String, Set<String>> quiz = new TreeMap<String, Set<String>>();
+        for(int i = 0; i < 4; i++){
+            String word = onThisDaySlang(true);
+            quiz.put(word, data.get(word));
+        }
+
+        int randQuiz = new Random().nextInt(4);        
+        System.out.println(randQuiz);
+
     }
 
 	public static void main(String[] args) throws IOException {
@@ -332,13 +344,13 @@ public class dictionary
                 resetDictionary();
             }
             else if (choice.equals("8")){
-                onThisDaySlang();
+                onThisDaySlang(false);
             }
             else if (choice.equals("9")){
-                System.out.println(choice);
+                slangWordQuiz();
             }
             else if (choice.equals("10")){
-                System.out.println(choice);
+            
             }
             else {
                 break;
