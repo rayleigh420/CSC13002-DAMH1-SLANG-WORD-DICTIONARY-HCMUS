@@ -300,19 +300,37 @@ public class dictionary
         List<String> keysAsArray = new ArrayList<String>(quiz.keySet());
         String quesWord = keysAsArray.get(randQuiz);
 
+        System.out.println();
+        System.out.println("Slang Word Quiz");
         System.out.println("Choose definition of this Slang Word: " + quesWord);
 
-        // int i = 1;
-        // Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
-        // q.forEach(item -> {
-        //     if (item.get){
-        //         System.out.print(i + ". " + item.getValue().iterator().next() + "\t\t");
-        //     }
-        //     else {
-        //         System.out.println(i + ". " + item.getValue().iterator().next());
-        //     }
-        //     i++;
-        // });
+        int i = 1;
+        Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
+        for(Map.Entry<String,Set<String>> item: q){
+            if (i % 2 == 1){
+                System.out.print(i + ". " + item.getValue().iterator().next() + "\t\t\t");
+            }
+            else {
+                System.out.println(i + ". " + item.getValue().iterator().next());
+            }
+            i++;
+        }
+
+        int chose;
+        System.out.print("Choose correct answer: ");
+        chose = Integer.parseInt(sc.nextLine()) - 1;
+        if (chose >= 0 && chose < 4){
+            if (chose == randQuiz){
+                System.out.println("Correct! Congratulation <3 <3 <3");
+            }
+            else {
+                System.out.println("Incorrect! Good luck for next time!");
+            }
+        }
+        else {
+            System.out.println("Invalid answer! Choose answer you see in the console please!");
+            return;
+        }
         
     }
 
