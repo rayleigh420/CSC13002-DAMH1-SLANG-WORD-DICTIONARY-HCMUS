@@ -19,10 +19,10 @@ public class dictionary
 
     public static void setUpDictionary() {
         loadData(DATA_DIR);
+        loadHistory();
         printDictionary();
 
         //history = new ArrayList<String>();
-        history = new Vector<String>();
     }
 
     private static void loadData(String PATH){
@@ -74,9 +74,23 @@ public class dictionary
         }
     }
 
-    // private void static loadHistory(){
-    //     history = new Set
-    // }
+    private static void loadHistory(){
+        history = new Vector<String>();
+
+        try(
+            BufferedReader br = new BufferedReader(new FileReader(new File(HISTORY)))
+        ){
+            String w;
+            while((w = br.readLine()) != null){
+                history.add(w);
+            }  
+            br.close();
+
+        }catch(IOException e){
+            System.out.println("Error message: " + e);
+        }
+        
+    }
 
     private static void saveHistory(){
         try(FileWriter fw = new FileWriter(new File(HISTORY))){
