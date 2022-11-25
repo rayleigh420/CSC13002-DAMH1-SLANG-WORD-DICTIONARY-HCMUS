@@ -295,10 +295,25 @@ public class dictionary
             String word = onThisDaySlang(true);
             quiz.put(word, data.get(word));
         }
+        int randQuiz = new Random().nextInt(4);
 
-        int randQuiz = new Random().nextInt(4);        
-        System.out.println(randQuiz);
+        List<String> keysAsArray = new ArrayList<String>(quiz.keySet());
+        String quesWord = keysAsArray.get(randQuiz);
 
+        System.out.println("Choose definition of this Slang Word: " + quesWord);
+
+        // int i = 1;
+        // Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
+        // q.forEach(item -> {
+        //     if (item.get){
+        //         System.out.print(i + ". " + item.getValue().iterator().next() + "\t\t");
+        //     }
+        //     else {
+        //         System.out.println(i + ". " + item.getValue().iterator().next());
+        //     }
+        //     i++;
+        // });
+        
     }
 
 	public static void main(String[] args) throws IOException {
