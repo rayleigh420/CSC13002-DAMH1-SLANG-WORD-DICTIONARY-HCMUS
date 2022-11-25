@@ -117,15 +117,22 @@ public class dictionary
         String word = sc.nextLine().trim().toUpperCase();
         addHistory(word);
 
+        Boolean flag = false;
+
         Set<String> def = data.get(word);
         if (def == null){
             Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
-            dictionary.forEach(item -> {
+            for(Map.Entry<String,Set<String>> item: dictionary){
                 String w = item.getKey();
                 if (w.contains(word.toUpperCase())){
+                    flag = true;
                     System.out.println(w + ": " + item.getKey());
                 }
-            });
+            }
+
+            if (flag == false){
+                System.out.println("Word not exist! Can not find!");
+            }
         }
         else {
             System.out.println("Founded!");
