@@ -334,6 +334,50 @@ public class dictionary
         
     }
 
+    public static void slangDefinitionQuiz(){
+        TreeMap<String, Set<String>> quiz = new TreeMap<String, Set<String>>();
+        for(int i = 0; i < 4; i++){
+            String word = onThisDaySlang(true);
+            quiz.put(word, data.get(word));
+        }
+        int randQuiz = new Random().nextInt(4);
+
+        List<String> keysAsArray = new ArrayList<String>(quiz.keySet());
+        String quesWord = keysAsArray.get(randQuiz);
+
+        System.out.println();
+        System.out.println("Slang Word Quiz follow definition");
+        System.out.println("Choose Slang Word has this definition: " + quiz.get(quesWord).iterator().next());
+
+        int i = 1;
+        Set<Map.Entry<String, Set<String>>> q = quiz.entrySet();
+        for(Map.Entry<String,Set<String>> item: q){
+            if (i % 2 == 1){
+                System.out.print(i + ". " + item.getKey() + "\t\t");
+            }
+            else {
+                System.out.println(i + ". " + item.getKey());
+            }
+            i++;
+        }
+
+        int chose;
+        System.out.print("Choose correct answer: ");
+        chose = Integer.parseInt(sc.nextLine()) - 1;
+        if (chose >= 0 && chose < 4){
+            if (chose == randQuiz){
+                System.out.println("Correct! Congratulation <3 <3 <3");
+            }
+            else {
+                System.out.println("Incorrect! Good luck for next time!");
+            }
+        }
+        else {
+            System.out.println("Invalid answer! Choose answer you see in the console please!");
+            return;
+        }
+    }
+
 	public static void main(String[] args) throws IOException {
         setUpDictionary();
         String choice;
@@ -383,7 +427,7 @@ public class dictionary
                 slangWordQuiz();
             }
             else if (choice.equals("10")){
-            
+                slangDefinitionQuiz();
             }
             else {
                 break;
