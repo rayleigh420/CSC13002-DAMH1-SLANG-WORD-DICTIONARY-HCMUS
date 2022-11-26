@@ -197,7 +197,8 @@ public class dictionary
         c = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < c; i++){
-            System.out.print("Enter " + i + 1 + "st definition: ");
+            int k = i + 1;
+            System.out.print("Enter " + k + "st definition: ");
             definition.add(sc.nextLine());
         }
 
@@ -241,7 +242,8 @@ public class dictionary
         c = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < c; i++){
-            System.out.print("Enter " + i + 1 + "st definition: ");
+            int k = i + 1;
+            System.out.print("Enter " + k + "st definition: ");
             definition.add(sc.nextLine());
         }
         
@@ -300,6 +302,8 @@ public class dictionary
         Random r = new Random();
         String word = keysAsArray.get(r.nextInt(keysAsArray.size()));
         if (quiz == false){
+            System.out.println();
+            System.out.println("On this day Slang Word!");
             System.out.println(word + ": " + data.get(word));
         }
         return word;
@@ -340,7 +344,9 @@ public class dictionary
                 System.out.println("Correct! Congratulation <3 <3 <3");
             }
             else {
+                int ans = randQuiz + 1;
                 System.out.println("Incorrect! Good luck for next time!");
+                System.out.println("Correct answer is: " + ans + ". " + quiz.get(quesWord));
             }
         }
         else {
@@ -385,7 +391,9 @@ public class dictionary
                 System.out.println("Correct! Congratulation <3 <3 <3");
             }
             else {
+                int ans = randQuiz + 1;
                 System.out.println("Incorrect! Good luck for next time!");
+                System.out.println("Correct answer is: " + ans + ". " + quesWord);
             }
         }
         else {
