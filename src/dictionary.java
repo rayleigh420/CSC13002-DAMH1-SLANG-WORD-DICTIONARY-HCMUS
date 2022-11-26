@@ -197,7 +197,7 @@ public class dictionary
         c = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < c; i++){
-            System.out.print("Enter " + i + " st definition: ");
+            System.out.print("Enter " + i + 1 + "st definition: ");
             definition.add(sc.nextLine());
         }
 
@@ -241,7 +241,7 @@ public class dictionary
         c = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < c; i++){
-            System.out.print("Enter " + i + " st definition: ");
+            System.out.print("Enter " + i + 1 + "st definition: ");
             definition.add(sc.nextLine());
         }
         
@@ -290,6 +290,8 @@ public class dictionary
 
     public static void resetDictionary(){
         loadData(RAW_DATA_DIR);
+        saveData();
+        System.out.println();
         System.out.println("Rest Dictionary Success!");
     }
 
