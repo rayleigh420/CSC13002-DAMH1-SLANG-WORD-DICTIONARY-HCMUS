@@ -146,15 +146,22 @@ public class dictionary
         System.out.print("Enter definition you want to search: ");
         String def = sc.nextLine().trim();
 
+        Boolean flag = false;
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
-        dictionary.forEach(item -> {
+        for(Map.Entry<String,Set<String>> item: dictionary){
             Set<String> defList = item.getValue();
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
+                    flag = true;
                     System.out.println(i);
                 }
             }
-        });
+
+        }
+
+        if(flag == false){
+            System.out.println("Can not find Slang Word has this definition!");
+        }
     }
 
     public static void printHistory(){
