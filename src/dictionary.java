@@ -19,7 +19,7 @@ public class dictionary
     public static void setUpDictionary() {
         loadData(DATA_DIR);
         loadHistory();
-        printDictionary();
+        // printDictionary();
     }
 
     private static void loadData(String PATH){
@@ -103,7 +103,7 @@ public class dictionary
 
     public static void printDictionary() {
         Set<Map.Entry<String, Set<String>>> dictionary = data.entrySet();
-        dictionary.forEach(item -> System.out.println(item.getKey() + ": " + item.getValue()));
+        dictionary.forEach(item -> System.out.println("\t" + item.getKey() + ": " + item.getValue()));
     }
 
     public static void addHistory(String word){
@@ -126,7 +126,7 @@ public class dictionary
                 String w = item.getKey();
                 if (w.contains(word.toUpperCase())){
                     flag = true;
-                    System.out.println(w + ": " + item.getKey());
+                    System.out.println("\t" + "+ " + w + ": " + item.getKey());
                 }
             }
 
@@ -136,7 +136,7 @@ public class dictionary
         }
         else {
             System.out.println("Founded!");
-            System.out.println(word + ": " + def);
+            System.out.println("\t" + "+ " + word + ": " + def);
         }
 
     }
@@ -153,7 +153,7 @@ public class dictionary
             for(String i : defList){
                 if (i.contains(def) || i.contains(def.toUpperCase()) || i.contains(def.toLowerCase())){
                     flag = true;
-                    System.out.println(i);
+                    System.out.println("\t" + "+ " + i);
                 }
             }
 
@@ -170,7 +170,7 @@ public class dictionary
         }
         else {
             for(String item : history){
-                System.out.println(item);
+                System.out.println("\t" + "+ " + item);
             }
         }
     }
@@ -341,7 +341,7 @@ public class dictionary
         chose = Integer.parseInt(sc.nextLine()) - 1;
         if (chose >= 0 && chose < 4){
             if (chose == randQuiz){
-                System.out.println("Correct! Congratulation <3 <3 <3");
+                System.out.println("Correct Answer! Congratulation <3 <3 <3");
             }
             else {
                 int ans = randQuiz + 1;
@@ -388,7 +388,7 @@ public class dictionary
         chose = Integer.parseInt(sc.nextLine()) - 1;
         if (chose >= 0 && chose < 4){
             if (chose == randQuiz){
-                System.out.println("Correct! Congratulation <3 <3 <3");
+                System.out.println("Correct Answer! Congratulation <3 <3 <3");
             }
             else {
                 int ans = randQuiz + 1;
@@ -439,7 +439,6 @@ public class dictionary
             }
             else if (choice.equals("6")){
                 deleteSlang();
-                printDictionary();
             }
             else if (choice.equals("7")){
                 resetDictionary();
